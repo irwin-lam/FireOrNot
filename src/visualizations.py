@@ -27,7 +27,7 @@ def plot_graph(results, size, name = 'None'):
     plt.figure()
 
 
-def plot_cm(model, name, test):
+def plot_cm(model, name, test, size):
     predictions = (model.predict(test) >= 0.5).astype(int)
     cm = confusion_matrix(test.labels, predictions)
     temp = name.replace(' ', '_')
@@ -37,6 +37,6 @@ def plot_cm(model, name, test):
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix')
-    plt.savefig(f'Logs/64x64/{temp}_cm.png')
+    plt.savefig(f'Logs/{size}/{temp}_cm.png')
     plt.show()
     return predictions
