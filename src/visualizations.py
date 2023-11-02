@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 from sklearn.metrics import confusion_matrix, classification_report
 
@@ -27,9 +28,9 @@ def plot_graph(results, size, name = 'None'):
     plt.figure()
 
 
-def plot_cm(model, name, test, size):
-    predictions = (model.predict(test) >= 0.5).astype(int)
-    cm = confusion_matrix(test.labels, predictions)
+def plot_cm(model, name, images, size):
+    predictions = (model.predict(images) >= 0.5).astype(int)
+    cm = confusion_matrix(images.labels, predictions, labels=[0,1])
     temp = name.replace(' ', '_')
 
     plt.figure(figsize=(6, 6))
