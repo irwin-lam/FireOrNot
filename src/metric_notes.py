@@ -1,4 +1,8 @@
 import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+from src.visualizations import plot_cm
 
 class metric_note():
 
@@ -35,3 +39,5 @@ class metric_note():
         add = [name, size] + train_results + test_results + valid_results
         self.printout.loc[len(self.printout.index)] = add
         self.printout
+
+        plot_cm(name, test_results, size)

@@ -27,17 +27,14 @@ def plot_graph(results, size, name = 'None'):
     plt.savefig(f'Logs/{size}/{temp}_loss.png')
     plt.figure()
 
-
-def plot_cm(model, name, images, size):
-    predictions = (model.predict(images) >= 0.5).astype(int)
-    cm = confusion_matrix(images.labels, predictions, labels=[0,1])
+def plot_cm(name, results, size):
+    _ , _, tp, tn, fp, fn = results
+    values = [[tn, fp], [fn, tp]]
     temp = name.replace(' ', '_')
-
     plt.figure(figsize=(6, 6))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+    sns.heatmap(values, annot=True, fmt = '0.2f', cmap='Blues')
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix')
     plt.savefig(f'Logs/{size}/{temp}_cm.png')
     plt.show()
-    return predictions
