@@ -1,2 +1,2 @@
-model_checkpoint_path: "CNN4_third"
-all_model_checkpoint_paths: "CNN4_third"
+model_checkpoint_path: "CNN4_best"
+all_model_checkpoint_paths: "CNN4_best"
