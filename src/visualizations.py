@@ -29,7 +29,7 @@ def plot_graph(results, size, name = 'None'):
 
 def plot_cm(name, results, size):
     _ , _, tp, tn, fp, fn = results
-    values = [[tn, fp], [fn, tp]]
+    values = [[tn, fn], [fp, tp]]
     temp = name.replace(' ', '_')
     plt.figure(figsize=(6, 6))
     sns.heatmap(values, annot=True, fmt = '0.2f', cmap='Blues')
