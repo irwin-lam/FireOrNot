@@ -28,7 +28,7 @@ def create_cnn4(node, dropout, learning,pixel):
         Dropout(dropout),
         Dense(1, activation='sigmoid')
     ])
-    optimizer = tf.keras.optimizers.Adam(learning_rate=learning)
+    optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=learning)
     cnn4.compile(
         optimizer=optimizer,
         loss='binary_crossentropy',
