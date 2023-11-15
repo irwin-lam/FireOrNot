@@ -18,7 +18,7 @@ nowildfire = './Figures/nowildfire'
 wildfire = './Figures/wildfire'
 
 #Labels
-class_labels = ['Not Wildfire', 'Wildfire']
+class_labels = ['Not A Wildfire', 'A Wildfire']
 
 #Function to change the images to match the model
 def process_image(image):
@@ -55,8 +55,8 @@ def random_select(num_images):
     selected_wild = random.sample(wild_images, num_images)
     selected_nowild = random.sample(nowild_images, num_images)
     
-    selected_images = [(str(Path(os.path.join(wildfire, image))), "Wildfire") 
-                       for image in selected_wild] + [(str(Path(os.path.join(nowildfire, image))), "Not Wildfire") 
+    selected_images = [(str(Path(os.path.join(wildfire, image))), "A Wildfire") 
+                       for image in selected_wild] + [(str(Path(os.path.join(nowildfire, image))), "Not A Wildfire") 
                                                       for image in selected_nowild]
     random.shuffle(selected_images)
 
