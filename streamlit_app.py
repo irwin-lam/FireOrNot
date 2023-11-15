@@ -6,7 +6,7 @@ import streamlit as st
 from PIL import Image
 import tensorflow as tf
 from src.build_models import create_cnn4
-@tf.function(reduce_retracing=True)
+
 
 #Loading the model
 model = create_cnn4(32, 0.1, 0.001,224)
@@ -22,6 +22,7 @@ wildfire = './Figures/wildfire'
 class_labels = ['Not A Wildfire', 'A Wildfire']
 
 #Function to change the images to match the model
+@tf.function(reduce_retracing=True)
 def process_image(image):
     try:
         resized_image = image.resize((224,224))
@@ -34,6 +35,7 @@ def process_image(image):
         return None
 
 #Function to output the prediction after running through the model
+@tf.function(reduce_retracing=True)
 def make_prediction(input_data):
     try:
         prediction = (model.predict(input_data) > .5).astype(int)
@@ -43,6 +45,7 @@ def make_prediction(input_data):
         return None
     
 #combines two functions together to return the label of the prediction
+@tf.function(reduce_retracing=True)
 def image_process(image_path):
     image = Image.open(image_path)
     open_image = process_image(image)
@@ -89,7 +92,8 @@ def display_images():
                         col[idx % 4].write(f'True: {true_label}')
 
 
-#predicting the uploaded image        
+#predicting the uploaded image
+@tf.function(reduce_retracing=True)
 def predict_image(uploaded_file):
     col = st.columns(1)
     if uploaded_file is not None:
