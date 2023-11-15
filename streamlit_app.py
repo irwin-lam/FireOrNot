@@ -6,7 +6,7 @@ import streamlit as st
 from PIL import Image
 import tensorflow as tf
 from src.build_models import create_cnn4
-
+@tf.function(reduce_retracing=True)
 #Loading the model
 model = create_cnn4(32, 0.1, 0.001,224)
 
