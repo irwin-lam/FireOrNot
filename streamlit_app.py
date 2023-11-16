@@ -5,14 +5,12 @@ import numpy as np
 import streamlit as st
 from PIL import Image
 import tensorflow as tf
-from src.build_models import create_cnn4
+import time
 
 
 #Loading the model
-model = create_cnn4(32, 0.1, 0.001,224)
+model = tf.keras.models.load_model('./Models_weights/CNN4_best')
 
-#silencing errors
-status = model.load_weights('./Models_weights/CNN4_best').expect_partial()
 
 #Paths to figures selected
 nowildfire = './Figures/nowildfire' 
@@ -34,6 +32,7 @@ def process_image(image):
         return None
 
 #Function to output the prediction after running through the model
+# @tf.function
 def make_prediction(input_data):
     try:
         prediction = (model.predict(input_data) > .5).astype(int)
@@ -43,6 +42,7 @@ def make_prediction(input_data):
         return None
     
 #combines two functions together to return the label of the prediction
+# @st.cache(allow_output_mutation=True)
 def image_process(image_path):
     image = Image.open(image_path)
     open_image = process_image(image)
@@ -82,7 +82,7 @@ def display_images():
             with col[idx % 4]:
                 st.image(image_path, caption=f"Image {idx+1}", use_column_width=True)
 
-                if st.button(f'Detect Image {idx + 1}'):
+                if st.button(f'Reveal Image {idx + 1}'):
                     with st.spinner(f'Detection in progress for Image {idx + 1}'):
                         prediction_label = image_process(image_path)
                         col[idx % 4].write(f'Prediction: {prediction_label}')
@@ -97,6 +97,7 @@ def predict_image(uploaded_file):
         with col[0]:
             if st.button('Detect'):
                 with st.spinner('Model is working...'):
+                    time.sleep(3)
                     prediction = image_process(uploaded_file)
                     st.write(f"<div style='text-align: center;'>This Image Is {prediction}.</div>", unsafe_allow_html=True)
             st.write("")
@@ -121,19 +122,21 @@ def main():
              environment and communities.''')
     
     st.write("")
-    
+    st.write("Let's see my model in action. Press the detect button under each image to see what the model predicts and the true label of the image.")
     st.markdown(
     "<div style='text-align: center;'>"
     "<h5 style='color: #ff6138;'>Select how many images to display</h1>"
     "</div>",
     unsafe_allow_html=True
     )
-    num_images_slider = st.slider("", 1, 10, st.session_state.num_displayed_images)
+    num_images = st.number_input("Enter a number between 1 and 10", 1, 10, st.session_state.num_displayed_images, key="num_images")
 
-    #Updating the number of images displayed
-    if num_images_slider != st.session_state.num_displayed_images:
-        st.session_state.selected_images = random_select(int(np.ceil(num_images_slider/2)))
-        st.session_state.num_displayed_images = num_images_slider
+    if st.button("Apply Changes"):
+        #Updating the number of images displayed
+        if num_images != st.session_state.num_displayed_images:
+            time.sleep(3)
+            st.session_state.selected_images = random_select(int(np.ceil(num_images/2)))
+            st.session_state.num_displayed_images = num_images
 
     display_images()
     
