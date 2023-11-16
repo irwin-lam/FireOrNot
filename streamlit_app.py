@@ -101,7 +101,8 @@ def predict_image(uploaded_file):
                 with st.spinner('Model is working...'):
                     time.sleep(3)
                     prediction = image_process(uploaded_file)
-                    st.write(f"<div style='text-align: center;'>This Image Is {prediction}.</div>", unsafe_allow_html=True)
+                    if prediction is not 'Please upload a valid image':
+                        st.write(f"<div style='text-align: center;'>This Image Is {prediction}.</div>", unsafe_allow_html=True)
             st.write("")
             st.image(image, caption = 'Uploaded Image', use_column_width = True)
             
