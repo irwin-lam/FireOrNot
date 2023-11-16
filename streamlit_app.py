@@ -85,8 +85,8 @@ def display_images():
                 if st.button(f'Reveal Image {idx + 1}'):
                     with st.spinner(f'Detection in progress for Image {idx + 1}'):
                         prediction_label = image_process(image_path)
-                        col[idx % 4].write(f'Prediction: {prediction_label}')
-                        col[idx % 4].write(f'True: {true_label}')
+                        col[idx % 4].write(f'Prediction Label: {prediction_label}')
+                        col[idx % 4].write(f'True Label: {true_label}')
 
 
 #predicting the uploaded image
