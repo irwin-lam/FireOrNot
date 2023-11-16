@@ -17,7 +17,7 @@ nowildfire = './Figures/nowildfire'
 wildfire = './Figures/wildfire'
 
 #Labels
-class_labels = ['Not A Wildfire', 'A Wildfire']
+class_labels = ['Not A Wildfire', 'A Wildfire', 'Please upload a valid image']
 
 #Function to change the images to match the model
 def process_image(image):
@@ -30,7 +30,7 @@ def process_image(image):
         return input_data
     except Exception as e:
         st.warning("Please upload a valid image")
-        return None
+        pass
 
 #Function to output the prediction after running through the model
 # @tf.function
@@ -40,19 +40,16 @@ def make_prediction(input_data):
         return prediction[0][0]
     except ValueError as e:
         st.warning("Please upload a valid image")
-        return None
+        return 2
     
 #combines two functions together to return the label of the prediction
 # @st.cache(allow_output_mutation=True)
 def image_process(image_path):
-    try:
-        image = Image.open(image_path)
-        open_image = process_image(image)
-        prediction = make_prediction(open_image)
-        return class_labels[prediction]
-    except ValueError as e:
-        st.warning("Please upload a valid image")
-        return None
+    image = Image.open(image_path)
+    open_image = process_image(image)
+    prediction = make_prediction(open_image)
+    return class_labels[prediction]
+
     
 #randomly select num_images from the paths and shuffles them
 def random_select(num_images):
