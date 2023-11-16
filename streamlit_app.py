@@ -45,11 +45,15 @@ def make_prediction(input_data):
 #combines two functions together to return the label of the prediction
 # @st.cache(allow_output_mutation=True)
 def image_process(image_path):
-    image = Image.open(image_path)
-    open_image = process_image(image)
-    prediction = make_prediction(open_image)
-    return class_labels[prediction]
-
+    try:
+        image = Image.open(image_path)
+        open_image = process_image(image)
+        prediction = make_prediction(open_image)
+        return class_labels[prediction]
+    except ValueError as e:
+        st.warning("Please upload a valid image")
+        return None
+    
 #randomly select num_images from the paths and shuffles them
 def random_select(num_images):
     wild_images = [image for image in os.listdir(wildfire)]
