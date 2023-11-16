@@ -23,37 +23,37 @@ After preprocessing the data and testing for over 20 models using various Conv2d
 I created a simple website in streamlit to showcase my model where a user can submit an satellite image that the model will use to predict if it has a wildfire or not. I added a feature where you change the number of images display and see if you can do better than the model. You look at it [here](https://irwin-lam-fireornot-streamlit-app-pgkq6i.streamlit.app/)
 
 ### Repo structure
-├── README.md
-├── Figures
-│   ├── nowildfire (Images)
-│   ├── wildfire (Images)
-│   ├── wildfire_dmg.png
-│   ├── wildfire_freq.png
-│   ├── movie_risk_genre.csv
-│   └── persons.csv
-├── Logs
-│   ├── 224x224  
-    ├── 64x64   
-│   ├── 32x32
-├── Models_weights
-│   ├── CNN4_best   
+├── README.md  
+├── Figures  
+│   ├── nowildfire (Images)  
+│   ├── wildfire (Images)  
+│   ├── wildfire_dmg.png  
+│   ├── wildfire_freq.png  
+│   ├── movie_risk_genre.csv  
+│   └── persons.csv  
+├── Logs  
+│   ├── 224x224  
+│   ├── 64x64       
+│   ├── 32x32    
+├── Models_weights  
+│   ├── CNN4_best     
 ├── src
-│   ├── movie_data_erd.jpeg│   
-    ├── risk_level_graphs│   
-        ├── level_1.png
-        ├── level_2.png
-        ├── level_3.png
-├── Final_Model.ipynb
-├── Notebooks
-│   ├── CNN_models.ipynb
-│   ├── Model_1.ipynb
-│   ├── Tuning_CNN1.ipynb
-│   ├── Tuning_CNN4.ipynb
-├── src
-│   ├── __init__.py
-│   ├── build_models.py
-│   ├── extract_to_df.py
-│   ├── metric_notes.py
-│   ├── visualizations.py
-├── streamlit_app.py
-├── requirements.txt
+│   ├── movie_data_erd.jpeg│     
+│   ├── risk_level_graphs│     
+│        ├── level_1.png  
+│        ├── level_2.png  
+│        ├── level_3.png  
+├── Final_Model.ipynb  
+├── Notebooks  
+│   ├── CNN_models.ipynb  
+│   ├── Model_1.ipynb  
+│   ├── Tuning_CNN1.ipynb  
+│   ├── Tuning_CNN4.ipynb  
+├── src  
+│   ├── __init__.py  
+│   ├── build_models.py  
+│   ├── extract_to_df.py  
+│   ├── metric_notes.py  
+│   ├── visualizations.py  
+├── streamlit_app.py  
+├── requirements.txt  
