@@ -26,6 +26,7 @@ def process_image(image):
         image_array = np.array(resized_image)
         normalized_image = image_array/255.0
         input_data = np.expand_dims(normalized_image, axis = 0)
+        input_data = np.expand_dims(input_data, axis = -1)
         return input_data
     except Exception as e:
         st.warning("Please upload a valid image")
@@ -38,7 +39,7 @@ def make_prediction(input_data):
         prediction = (model.predict(input_data) > .5).astype(int)
         return prediction[0][0]
     except ValueError as e:
-        st.warning("")
+        st.warning("Please upload a valid image")
         return None
     
 #combines two functions together to return the label of the prediction
@@ -122,7 +123,7 @@ def main():
              environment and communities.''')
     
     st.write("")
-    st.write("Let's see my model in action. Press the detect button under each image to see what the model predicts and the true label of the image.")
+    st.write("Let's see my model in action. Press the reveal button under each image to see what the model predicts and what the image is.")
     st.markdown(
     "<div style='text-align: center;'>"
     "<h5 style='color: #ff6138;'>Select how many images to display</h1>"
